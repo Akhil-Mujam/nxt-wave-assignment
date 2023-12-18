@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import work from './work.jpg'
 import './Item.css'
 import axios from 'axios';
+import Navbar from './Navbar';
 const Item= () => {
   // State to store form input values
   
@@ -12,13 +13,15 @@ const Item= () => {
  const[description,setdescription] = useState('')
  const[category,setcategory] = useState('')
  const[tag,settag] = useState('')
+ const[id,setid] = useState('0')
+
   let count=0;
-  // Handler for input changes
+  
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+      count=count+1
     try {
       const response = await axios.post('https://media-content.ccbp.in/website/react-assignment/add_resource.json',{
         
@@ -27,7 +30,8 @@ const Item= () => {
             link: link,
             description: description,
             category:category,
-            tag: tag
+            tag: tag,
+            id:count
         
     });
       if (response.status === 200) {
@@ -42,10 +46,15 @@ const Item= () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
+    <div >
+        <Navbar/>
+      
+      <div className="row container">
         {/* Left side with form */}
-        <div className="col-md-6">
+        <div className="col-md-6 p-3">
+
+        <a href='/' className='text-secondary p-4 m-4'>Users</a>
+        <h2>Item Details</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="itemTitle">Item Title:</label>

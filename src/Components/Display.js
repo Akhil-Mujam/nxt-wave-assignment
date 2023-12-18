@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 import './Display.css'
+import Navbar from './Navbar'
 const Display = () => {
 
     const [data,setdata] = useState([])
@@ -19,8 +20,9 @@ const Display = () => {
 
     
   return (
+   
    <div className='bg-light'>
-
+            <Navbar/>
           <center >
             <button className='btn btn-outline-primary text-center sc active'>Resources</button>
             <button className='btn btn-outline-primary text-center sc'>Request</button>
