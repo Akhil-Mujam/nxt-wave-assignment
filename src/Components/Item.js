@@ -2,31 +2,43 @@
 import React, { useState } from 'react';
 import work from './work.jpg'
 import './Item.css'
+import axios from 'axios';
 const Item= () => {
   // State to store form input values
-  const [formData, setFormData] = useState({
-    itemTitle: '',
-    link: '',
-    iconUrl: '',
-    tagName: '',
-    category: '',
-    description: '',
-  });
-
+  
+ const[title,settitle] = useState('')
+ const[icon_url,seticon_url] = useState('')
+ const[link,setlink] = useState('')
+ const[description,setdescription] = useState('')
+ const[category,setcategory] = useState('')
+ const[tag,settag] = useState('')
+  let count=0;
   // Handler for input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  
 
-  // Handler for form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform actions with form data (e.g., send it to a server)
-    console.log('Form submitted:', formData);
+
+    try {
+      const response = await axios.post('https://media-content.ccbp.in/website/react-assignment/add_resource.json',{
+        
+            title: title,
+            icon_url: icon_url,
+            link: link,
+            description: description,
+            category:category,
+            tag: tag
+        
+    });
+      if (response.status === 200) {
+        console.log('Resource added successfully');
+        
+      } else {
+        console.error('Failed to add resource');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -41,9 +53,9 @@ const Item= () => {
                 type="text"
                 className="form-control"
                 id="itemTitle"
-                name="itemTitle"
-                value={formData.itemTitle}
-                onChange={handleInputChange}
+                name="title"
+               
+                onChange={e => { settitle(e.targetvalue)}}
               />
             </div>
             <div className="form-group">
@@ -53,8 +65,8 @@ const Item= () => {
                 className="form-control"
                 id="link"
                 name="link"
-                value={formData.link}
-                onChange={handleInputChange}
+               
+                onChange={e => { setlink(e.target.value)}}
               />
             </div>
             <div className="form-group">
@@ -63,9 +75,9 @@ const Item= () => {
                 type="text"
                 className="form-control"
                 id="iconUrl"
-                name="iconUrl"
-                value={formData.iconUrl}
-                onChange={handleInputChange}
+                name="icon_url"
+                
+                onChange={e =>{ seticon_url(e.target.value)}}
               />
             </div>
             <div className="form-group">
@@ -74,9 +86,10 @@ const Item= () => {
                 type="text"
                 className="form-control"
                 id="tagName"
-                name="tagName"
-                value={formData.tagName}
-                onChange={handleInputChange}
+                name="tag"
+               
+                onChange={e => { settag(e.target.value)}}
+
               />
             </div>
             <div className="form-group">
@@ -86,8 +99,8 @@ const Item= () => {
                 className="form-control"
                 id="category"
                 name="category"
-                value={formData.category}
-                onChange={handleInputChange}
+                
+                onChange={e =>{ setcategory(e.target.value)}}
               />
             </div>
             <div className="form-group">
@@ -97,8 +110,7 @@ const Item= () => {
                 id="description"
                 name="description"
                 rows="3"
-                value={formData.description}
-                onChange={handleInputChange}
+                onChange={e =>{setdescription(e.target.value)}}
               ></textarea>
             </div>
             <button type="submit" className="btn btn-primary">
@@ -109,11 +121,7 @@ const Item= () => {
 
         {/* Right side with an image */}
         <div className="col-md-6 imagedesign">
-          <img
-            src={work}
-            alt="Image"
-            className="img-fluid"
-          />
+         
         </div>
       </div>
     </div>
