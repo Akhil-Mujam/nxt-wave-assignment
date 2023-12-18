@@ -1,0 +1,26 @@
+.card{
+    width:360px;
+    height: 192px;
+    display: flex;
+    justify-content: space-between;
+}
+.img-title{
+    display: flex;
+    justify-content: space-evenly;
+}
+.head{
+    display: flex;
+    
+}
+.change1{
+    position:relative;
+    right:40px;
+    padding-top: 10px;
+}
+.col{
+    background-color: white;
+}
+.sc{
+    width: 200px;
+    height: 40px;
+}
