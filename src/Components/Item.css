@@ -7,7 +7,8 @@
 }
 
 .input-width{
-    width: 250px;
+    width: 320px;
+    height: 40px;
     position: relative;
     left: 150px;
 }
