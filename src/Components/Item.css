@@ -3,4 +3,18 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
+}
+
+.input-width{
+    width: 250px;
+    position: relative;
+    left: 150px;
+}
+.name-label{
+    position: relative;
+    right: 150px;
+}
+.form-group{
+    margin-bottom: 12px;
 }

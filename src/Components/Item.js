@@ -22,6 +22,7 @@ const Item= () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
       count=count+1
+      setid(count)
     try {
       const response = await axios.post('https://media-content.ccbp.in/website/react-assignment/add_resource.json',{
         
@@ -31,7 +32,7 @@ const Item= () => {
             description: description,
             category:category,
             tag: tag,
-            id:count
+            id:id
         
     });
       if (response.status === 200) {
@@ -49,79 +50,75 @@ const Item= () => {
     <div >
         <Navbar/>
       
-      <div className="row container">
+      <div className="row container-fluid ">
         {/* Left side with form */}
-        <div className="col-md-6 p-3">
+        <div className="col-md-6 p-3 ">
 
         <a href='/' className='text-secondary p-4 m-4'>Users</a>
         <h2>Item Details</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="itemTitle">Item Title:</label>
+          <form onSubmit={handleSubmit} >
+            <div className="form-group"> 
+              <p className='name-label'>Image Title</p>
               <input
                 type="text"
-                className="form-control"
+                className="form-control input-width"
                 id="itemTitle"
                 name="title"
-               
-                onChange={e => { settitle(e.targetvalue)}}
+                onChange={e => { settitle(e.targetvalue)}}  required
+
               />
             </div>
             <div className="form-group">
-              <label htmlFor="link">Link:</label>
+              <label htmlFor="link" className='name-label'>Link:</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control input-width"
                 id="link"
                 name="link"
-               
+                 required
                 onChange={e => { setlink(e.target.value)}}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="iconUrl">Icon URL:</label>
+              <label htmlFor="iconUrl" className='name-label'>Icon URL:</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control input-width"
                 id="iconUrl"
                 name="icon_url"
-                
+                required
                 onChange={e =>{ seticon_url(e.target.value)}}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="tagName">Tag Name:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tagName"
-                name="tag"
-               
-                onChange={e => { settag(e.target.value)}}
-
-              />
+            <div className="form-group ">
+              <label htmlFor="tagName" className='name-label'>Tag Name:</label>
+              <select name="tag" className='form-control input-width'  onChange={e => { settag(e.target.value)}}>
+                <option value="user">User</option>
+                <option value="request">request</option>
+              </select>
             </div>
             <div className="form-group">
-              <label htmlFor="category">Category:</label>
+              <label htmlFor="category" className='name-label'>Category:</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control input-width"
                 id="category"
                 name="category"
-                
+                required
                 onChange={e =>{ setcategory(e.target.value)}}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="description">Description:</label>
+            <div className="form-group ">
+              <label htmlFor="description" className='name-label'>Description:</label>
               <textarea
-                className="form-control"
+                className="form-control input-width"
                 id="description"
                 name="description"
                 rows="3"
-                onChange={e =>{setdescription(e.target.value)}}
+                onChange={e =>{setdescription(e.target.value)}} required
               ></textarea>
             </div>
+            <br/>
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
